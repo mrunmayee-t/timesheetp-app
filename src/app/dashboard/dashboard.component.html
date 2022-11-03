@@ -1,0 +1,146 @@
+<mat-toolbar class="border_top app_toolbar">
+    <mat-toolbar-row>
+        <img src="../../assets/IntignoLogo.png" class="logo"/>
+        <span class="example-spacer"></span>
+        <button mat-icon-button [matMenuTriggerFor]="userMenu">
+           <ngx-avatars size="40" name="{{firstName}}  {{lastName}}" [style]="customStyle"></ngx-avatars> 
+        </button>
+        <mat-menu #userMenu="matMenu">
+            <button mat-menu-item>
+                <mat-icon>settings_applications</mat-icon>
+                <span>Settings</span>
+            </button>
+            <button mat-menu-item (click)="btnLogout()">
+                <mat-icon>exit_to_app</mat-icon>
+                <span>Logout</span>
+            </button>
+        </mat-menu>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<div fxLayout="column" style="margin-top: 8%;">
+    <div fxLayout="row" fxLayoutGap="10px">
+        <form [formGroup]="datePickerForm">
+            <mat-form-field appearance="fill" class="dashboard-datepicker-form"  fxLayoutAlign="center center">
+                <mat-label>Enter a date range</mat-label>
+                <mat-date-range-input [rangePicker]="picker">
+                <input matStartDate placeholder="Start date" formControlName="startDate">
+                <input matEndDate placeholder="End date" formControlName="endDate">
+                </mat-date-range-input>
+                <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
+        </form>
+        <div>
+            <button mat-button fxLayoutAlign="end end" (click)="btnAddClicked()">Add</button>
+        </div>
+    </div>
+    <div fxLayout="column">
+        <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="position">
+                <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="project">
+                <mat-header-cell *matHeaderCellDef class="mat-header-cell"> Project </mat-header-cell>
+                    <mat-cell *matCellDef="let element;" [formGroup]="element"> 
+                        <mat-form-field floatLabel="never">
+                            <input matInput placeholder="Project" formControlName="project" required>
+                        </mat-form-field>
+                    </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="tasks">
+                <mat-header-cell *matHeaderCellDef> Tasks </mat-header-cell>
+                <mat-cell *matCellDef="let element;" [formGroup]="element"> 
+                    <mat-form-field floatLabel="never">
+                        <input matInput placeholder="Tasks" formControlName="tasks" required>
+                    </mat-form-field>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="mon">
+                <mat-header-cell *matHeaderCellDef> Mon </mat-header-cell>
+                <mat-cell *matCellDef="let element;" [formGroup]="element"> 
+                    <mat-form-field floatLabel="never">
+                        <input matInput placeholder="00:00" formControlName="mon" required>
+                    </mat-form-field>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="tue">
+                <mat-header-cell *matHeaderCellDef> Tue </mat-header-cell>
+                <mat-cell *matCellDef="let element;" [formGroup]="element"> 
+                    <mat-form-field floatLabel="never">
+                        <input matInput placeholder="00:00" formControlName="tue" required>
+                    </mat-form-field>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="wed">
+                <mat-header-cell *matHeaderCellDef> Wed </mat-header-cell>
+                <mat-cell *matCellDef="let element;" [formGroup]="element"> 
+                    <mat-form-field floatLabel="never">
+                        <input matInput placeholder="00:00" formControlName="wed" required>
+                    </mat-form-field>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="thu">
+                <mat-header-cell *matHeaderCellDef> Thu </mat-header-cell>
+                <mat-cell *matCellDef="let element;" [formGroup]="element"> 
+                    <mat-form-field floatLabel="never">
+                        <input matInput placeholder="00:00" formControlName="thu" required>
+                    </mat-form-field>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="fri">
+                <mat-header-cell *matHeaderCellDef> Fri </mat-header-cell>
+                <mat-cell *matCellDef="let element;" [formGroup]="element"> 
+                    <mat-form-field floatLabel="never">
+                        <input matInput placeholder="00:00" formControlName="fri" required>
+                    </mat-form-field>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="sat">
+                <mat-header-cell *matHeaderCellDef> Sat </mat-header-cell>
+                <mat-cell *matCellDef="let element;" [formGroup]="element"> 
+                    <mat-form-field floatLabel="never">
+                        <input matInput placeholder="00:00" formControlName="sat" required>
+                    </mat-form-field>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="sun">
+                <mat-header-cell *matHeaderCellDef> Sun </mat-header-cell>
+                <mat-cell *matCellDef="let element;" [formGroup]="element"> 
+                    <mat-form-field floatLabel="never">
+                        <input matInput placeholder="00:00" formControlName="sun" required>
+                    </mat-form-field>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="hours">
+                <mat-header-cell *matHeaderCellDef> Total Hours </mat-header-cell>
+                <mat-cell *matCellDef="let element;" [formGroup]="element"> 
+                    <mat-form-field floatLabel="never">
+                        <input matInput placeholder="00:00" formControlName="hours" required>
+                    </mat-form-field>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="delete">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Delete </mat-header-cell>
+                <mat-cell *matCellDef="let element"> 
+                    <button mat-icon-button matTooltip="Click to Delete" class="iconbutton"
+                     color="purple">
+                     <mat-icon aria-hidden="false" aria-label="delete" fontIcon="delete"></mat-icon>
+                  </button> 
+                </mat-cell>
+              </ng-container>
+
+            <!-- <tr mat-header-row *matHeaderRowDef="dateRangeColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: dateRangeColumns;"></tr> -->
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </div>
+</div>
+
+  
